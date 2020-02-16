@@ -4,14 +4,7 @@ import {LinearGradient} from 'react-native-linear-gradient'
 
 function Home () {
   return (
-    <LinearGradient
-    colors={['#fad665', '#ffc713']}
-    style={style.container}
-    useAngle={true}
-    angle={45}>
-
-
-    </LinearGradient>
+    <Text>teste</Text>
   )
 }
 
