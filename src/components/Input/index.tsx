@@ -17,6 +17,7 @@ function Input ({event, message,...props}: Props) {
   const [initialStyle, setInitialStyle] = useState({
     borderBottomColor: 'rgba(0,0,0,0.3)',
     color: '#00053d',
+    backgroundColor: 'rgba(0,0,0,0)'
   })
 
   const handleChange = (value: string) => {
@@ -41,10 +42,12 @@ function Input ({event, message,...props}: Props) {
       ? setInitialStyle({
           ...initialStyle,
           borderBottomColor: '#00053d',
+          backgroundColor: '#eee'
         })
       : setInitialStyle({
           ...initialStyle,
           borderBottomColor: 'rgba(0,0,0,.3)',
+          backgroundColor: 'rgba(0,0,0,0)'
         });
   }, [initialState.isFocus]);
 
@@ -70,6 +73,7 @@ const style = StyleSheet.create({
   Input: {
     borderBottomWidth: 2,
     marginVertical: 5,
+    paddingHorizontal: 15
   },
   message: {
     color: '#b71c1c',

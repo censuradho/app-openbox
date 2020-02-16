@@ -13,7 +13,7 @@ import {
 
 import {NavigationContainerProps} from 'react-navigation';
 // components
-import Input from '../components/Input'
+import Input from '../../components/Input'
 
 function Login ({ navigation}: NavigationContainerProps) {
   const [credentials, setCredentials] = useState({
@@ -32,7 +32,7 @@ function Login ({ navigation}: NavigationContainerProps) {
   return (
     <View style={style.container}>
       <Image
-        source={require('../assets/img/logo-full.png')}
+        source={require('../../assets/img/logo-full.png')}
         style={style.logo}
       />
       <Input 
