@@ -5,9 +5,20 @@ import { createStackNavigator } from 'react-navigation-stack'
 // screens
 import Login from './screens/Login'
 import Home from './screens/Home'
+import Home2 from './screens/Home2'
 
 export default createAppContainer(
   createStackNavigator({
+    // Home2: {
+    //   screen: Home2,
+    //   navigationOptions: {
+    //     header: null,
+    //     headerStyle: {
+    //       elevation: 0,
+    //       height: 0,
+    //     }
+    //   }
+    // },
     Login: {
       screen: Login,
       navigationOptions: {

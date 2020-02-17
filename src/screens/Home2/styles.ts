@@ -3,14 +3,25 @@ import styled from 'styled-components/native'
 import { body1 } from '../../themes/defaultStyles'
 export const Container = styled.View`
   flex: 1;
+` 
+export const Banner = styled.View`
+  height: 250px;
+  width: 100%;
+  background: ${props => props.theme.colors.primary};
   justify-content: center;
   align-items: center;
-  background: ${props => props.theme.colors.primary};
-  padding: 0;
-` 
-
+`
 export const Username = styled(body1)`
   font-weight: bold;
+`
+export const Note = styled.View`
+  width: 300px;
+  height: 100px;
+  background: ${props => props.theme.colors.background};
+  position: absolute;
+  top: 175px;
+  border-radius: 20px;
+  left: 10%;
 `
 
 export const Text = styled(body1)`

@@ -1,7 +1,7 @@
 import styled from 'styled-components/native'
 
 export const body1 = styled.Text`
-  font-size: 18;
+  font-size: 18px;
   color: ${props => props.theme.colors.color};
   margin-bottom: 20px;
 `
@@ -10,7 +10,10 @@ export default {
   colors: {
     primary: '#FFCB04',
     secundary: '#343348',
-    color: '#fff'
+    background: '#fff',
+    color: '#fff',
+    body1: 'rgba(0,0,0,.80)',
+    body2: 'rgba(0,0,0,.60)',
   }
 }
 

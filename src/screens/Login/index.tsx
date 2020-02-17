@@ -1,4 +1,12 @@
 import React, {useState} from 'react';
+import qs from 'query-string'
+import { useDispatch } from 'react-redux'
+
+import { setToken } from '../../store/actions/token'
+
+// services
+import api from '../../services/auth'
+
 import {
   View,
   Text,
@@ -16,18 +24,32 @@ import {NavigationContainerProps} from 'react-navigation';
 import Input from '../../components/Input'
 
 function Login ({ navigation}: NavigationContainerProps) {
+  const dispatch = useDispatch()
   const [credentials, setCredentials] = useState({
     email: '', senha: ''
   })
 
+  // `email=${email}&senha=${senha}
   const asideLinks = () => {
     Alert.alert('em breve! :)');
   };
 
-  const handleSubmit = () => {
-    navigation?.navigate('Home')
-
-    console.log(credentials);
+  const getToken = async () => {
+    try {
+      const { data } = await api.post('/loginmobile/', qs.stringify(credentials))
+      console.log('asdadasdasdasasdasdasdssds')
+      // if(data !== 0) {
+      //   // dispatch(setToken({ apiKey: data, email: credentials.email }))
+      //   console.log(data)
+      //   navigation?.navigate('Home')
+      // }
+    } catch(err) {
+      console.log(err)
+    }
+  }
+  const handleSubmit = async () => {
+    getToken()
+  
   };
   return (
     <View style={style.container}>
@@ -70,7 +92,7 @@ const style = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    padding: 20,
+    paddingHorizontal: 20,
   },
   logo: {
     marginVertical: 50,
