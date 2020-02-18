@@ -51,6 +51,19 @@ function Input ({event, message,...props}: Props) {
         });
   }, [initialState.isFocus]);
 
+  useEffect(() => {
+    props.editable 
+    ? setInitialStyle({
+      ...initialStyle,
+      borderBottomColor: 'rgba(0,0,0,.3) !important',
+      backgroundColor: 'rgba(0,0,0,0)'
+    })
+    : setInitialStyle({
+      ...initialStyle,
+      borderBottomColor: '#eee',
+      backgroundColor: 'rgba(0,0,0,0)'
+    })
+  }, [props.editable])
   return (
     <View style={style.container}>
       <TextInput 

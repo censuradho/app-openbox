@@ -3,6 +3,7 @@ import {LinearGradient} from 'react-native-linear-gradient'
 import Emoji from 'react-native-emoji'
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
 import { useSelector } from 'react-redux'
+import qs from 'query-string'
 
 // services
 import api from '../../services/auth'
@@ -10,7 +11,11 @@ import api from '../../services/auth'
 // styles
 import { Container, Username, Text, Rendimento, EmojiList } from './styles'
 
-type Token = { apiKey: string, email: string }
+// utils
+import help from '../../utils/help'
+
+type Token = { apiKey: string, email: string, nome: string }
+
 function Home () {
   const emojiList = ['sos', 'mask', 'hot_pepper', 'sunflower', 'dart', 'snake', 'heartbeat']
 
@@ -18,15 +23,18 @@ function Home () {
     isShow: false,
     index: Math.floor(Math.random() * emojiList.length),
   }
+
   const [state, setState] = useState(initialState)
+  const [userInfo, setUserInfo] = useState({nome: '', tokenApi: '', rendimento: 0})
   const token: Token = useSelector((value: any) => value.token)
 
-  const getRendimento = async () => {
-    const { data } = await api.post('/rendimento/', token)
-    console.log(data)
+  const getUserInfo = async () => {
+    const { data } = await api.post('/rendimento/', qs.stringify({ apiKey: token.apiKey, email: token.email }))
+    setUserInfo({ rendimento: help.formatBRL(+data.msg), nome: token.nome, tokenApi: token.apiKey })
   }
+
   useEffect(() => { 
-    getRendimento()
+    getUserInfo()
   }, [token])
 
   const toggle = () => {
@@ -35,10 +43,10 @@ function Home () {
 
   return (
     <Container> 
-      <Username>Gustavo Leite Oliveira</Username>
+      <Username>{userInfo.nome}</Username>
       <Text>Rendimento</Text>
       { state.isShow 
-        ? <Rendimento>R$ 5.000,00</Rendimento>
+        ? <Rendimento>{userInfo.rendimento}</Rendimento>
         : <EmojiList>
           <Emoji name={emojiList[state.index]} style={{fontSize: 30}}/>
             <Emoji name={emojiList[state.index]} style={{fontSize: 30}}/>

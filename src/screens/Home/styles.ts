@@ -17,11 +17,11 @@ export const Text = styled(body1)`
   margin-bottom: 0;
 `
 export const Rendimento = styled(body1)`
-  font-size: 34px;
+  font-size: 30px;
 `
 
 export const EmojiList = styled.View`
   flex-direction: row;
   align-items: center;
-  margin-bottom: 25px;
+  margin-bottom: 20px;
 ` 

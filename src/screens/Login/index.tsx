@@ -1,8 +1,12 @@
 import React, {useState} from 'react';
 import qs from 'query-string'
 import { useDispatch } from 'react-redux'
+import { ActivityIndicator as Loader } from 'react-native'
 
 import { setToken } from '../../store/actions/token'
+
+// styles
+import { LoaderContainer } from './style'
 
 // services
 import api from '../../services/auth'
@@ -25,6 +29,8 @@ import Input from '../../components/Input'
 
 function Login ({ navigation}: NavigationContainerProps) {
   const dispatch = useDispatch()
+
+  const [isFetching, setIsFetching] = useState(false)
   const [credentials, setCredentials] = useState({
     email: '', senha: ''
   })
@@ -37,17 +43,18 @@ function Login ({ navigation}: NavigationContainerProps) {
   const getToken = async () => {
     try {
       const { data } = await api.post('/loginmobile/', qs.stringify(credentials))
-      console.log('asdadasdasdasasdasdasdssds')
-      // if(data !== 0) {
-      //   // dispatch(setToken({ apiKey: data, email: credentials.email }))
-      //   console.log(data)
-      //   navigation?.navigate('Home')
-      // }
+      if(data !== 0) {
+        dispatch(setToken({ apiKey: data.token, email: credentials.email, nome: data.nome }))
+        navigation?.navigate('Home')
+      }
     } catch(err) {
       console.log(err)
     }
+    setIsFetching(false)
   }
+
   const handleSubmit = async () => {
+    setIsFetching(true)
     getToken()
   
   };
@@ -61,27 +68,34 @@ function Login ({ navigation}: NavigationContainerProps) {
         placeholder="e-mail"
         event={email => setCredentials({...credentials, email })}
         message={true}
+        editable={!isFetching}
       />
 
       <Input 
         placeholder="senha"
         event={senha => setCredentials({...credentials, senha })}
         message={true}
+        secureTextEntry={true}
+        editable={!isFetching}
       />
      <TouchW onPress={asideLinks}>
         <Text style={[style.asideLinks, {alignSelf: 'flex-end'}]}>
           Esqueceu a senha?
         </Text>
       </TouchW>
-
-      <TouchH style={style.ButtonSubmit} onPress={handleSubmit}>
-        <Text style={style.ButtonText}>login</Text>
-      </TouchH>
+      <LoaderContainer>
+        { !isFetching 
+        ? <TouchH style={style.ButtonSubmit} onPress={handleSubmit}>
+          <Text style={style.ButtonText}>login</Text>
+        </TouchH>
+        : <Loader size="large" color="#212121"/> }
+      </LoaderContainer>
       <TouchW onPress={asideLinks}>
         <Text style={[style.asideLinks, {alignSelf: 'flex-start'}]}>
           Não é cadastrado?
         </Text>
       </TouchW>
+ 
     </View>
 
   )
@@ -116,6 +130,8 @@ const style = StyleSheet.create({
     color: '#fff',
     fontSize: 15,
     fontWeight: 'bold',
+    letterSpacing: 3,
+
   },
   asideLinks: {
     textDecorationLine: 'underline',

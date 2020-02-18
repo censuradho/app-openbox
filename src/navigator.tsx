@@ -9,6 +9,15 @@ import Home2 from './screens/Home2'
 
 export default createAppContainer(
   createStackNavigator({
+    Login: {
+      screen: Login,
+      navigationOptions: {
+        headerStyle: {
+          elevation: 0,
+          height: 0,
+        }
+      }
+    },
     // Home2: {
     //   screen: Home2,
     //   navigationOptions: {
@@ -19,15 +28,6 @@ export default createAppContainer(
     //     }
     //   }
     // },
-    Login: {
-      screen: Login,
-      navigationOptions: {
-        headerStyle: {
-          elevation: 0,
-          height: 0,
-        }
-      }
-    },
     Home: {
       screen: Home,
       navigationOptions: {

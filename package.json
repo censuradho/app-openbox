@@ -16,7 +16,7 @@
     "@types/react-test-renderer": "^16.9.1",
     "axios": "^0.19.2",
     "query-string": "^6.11.0",
-    "react": "16.9.0",
+    "react": "16",
     "react-native": "0.61.5",
     "react-native-emoji": "^1.8.0",
     "react-native-gesture-handler": "^1.5.2",

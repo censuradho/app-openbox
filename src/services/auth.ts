@@ -1,7 +1,7 @@
 import axios from 'axios'
 
 const api = axios.create({
-  baseURL: 'http://192.168.42.2:3001/mvp_dev/openboxai_plataform/api',
+  baseURL: 'http://openbox.ai/mvp_dev/api',
   headers: { "Content-Type": "application/x-www-form-urlencoded" }
 })
 
