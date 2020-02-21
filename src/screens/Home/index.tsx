@@ -17,20 +17,13 @@ import help from '../../utils/help'
 type Token = { apiKey: string, email: string, nome: string }
 
 function Home () {
-  const emojiList = ['sos', 'mask', 'hot_pepper', 'sunflower', 'dart', 'snake', 'heartbeat']
 
-  const initialState = {
-    isShow: false,
-    index: Math.floor(Math.random() * emojiList.length),
-  }
-
-  const [state, setState] = useState(initialState)
   const [userInfo, setUserInfo] = useState({nome: '', tokenApi: '', rendimento: 0})
   const token: Token = useSelector((value: any) => value.token)
 
   const getUserInfo = async () => {
     const { data } = await api.post('/rendimento/', qs.stringify({ apiKey: token.apiKey, email: token.email }))
-    setUserInfo({ rendimento: help.formatBRL(+data.msg), nome: token.nome, tokenApi: token.apiKey })
+    setUserInfo({ rendimento: data.msg, nome: token.nome, tokenApi: token.apiKey })
   }
 
   useEffect(() => { 
@@ -43,19 +36,7 @@ function Home () {
 
   return (
     <Container> 
-      <Username>{userInfo.nome}</Username>
-      <Text>Rendimento</Text>
-      { state.isShow 
-        ? <Rendimento>{userInfo.rendimento}</Rendimento>
-        : <EmojiList>
-          <Emoji name={emojiList[state.index]} style={{fontSize: 30}}/>
-            <Emoji name={emojiList[state.index]} style={{fontSize: 30}}/>
-            <Emoji name={emojiList[state.index]} style={{fontSize: 30}}/>
-            <Emoji name={emojiList[state.index]} style={{fontSize: 30}}/>
-          </EmojiList> }
-        { state.isShow
-          ? <Icon name="eye-off" size={30} color="#fff" onPress={toggle} style={{ padding: 10}}/>
-          : <Icon name="eye" size={30} color="#fff" onPress={toggle} style={{ padding: 10}}/>}
+  
     </Container>
   )
 }
