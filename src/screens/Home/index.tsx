@@ -30,7 +30,7 @@ function Home () {
 
   const getUserInfo = async () => {
     const { data } = await api.post('/rendimento/', qs.stringify({ apiKey: token.apiKey, email: token.email }))
-    setUserInfo({ rendimento: help.formatBRL(+data.msg), nome: token.nome, tokenApi: token.apiKey })
+    setUserInfo({ rendimento: data.msg, nome: token.nome, tokenApi: token.apiKey })
   }
 
   useEffect(() => { 
@@ -44,7 +44,7 @@ function Home () {
   return (
     <Container> 
       <Username>{userInfo.nome}</Username>
-      <Text>Rendimento</Text>
+      <Text>Valor acumulado</Text>
       { state.isShow 
         ? <Rendimento>{userInfo.rendimento}</Rendimento>
         : <EmojiList>
@@ -54,8 +54,8 @@ function Home () {
             <Emoji name={emojiList[state.index]} style={{fontSize: 30}}/>
           </EmojiList> }
         { state.isShow
-          ? <Icon name="eye-off" size={30} color="#fff" onPress={toggle} style={{ padding: 10}}/>
-          : <Icon name="eye" size={30} color="#fff" onPress={toggle} style={{ padding: 10}}/>}
+          ? <Icon name="eye-off-outline" size={30} color="#fff" onPress={toggle} style={{ padding: 10}}/>
+          : <Icon name="eye-outline" size={30} color="#fff" onPress={toggle} style={{ padding: 10}}/>}
     </Container>
   )
 }

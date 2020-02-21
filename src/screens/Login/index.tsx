@@ -42,14 +42,18 @@ function Login ({ navigation}: NavigationContainerProps) {
 
   const getToken = async () => {
     try {
-      const { data } = await api.post('/loginmobile/', qs.stringify(credentials))
-      if(data !== 0) {
-        dispatch(setToken({ apiKey: data.token, email: credentials.email, nome: data.nome }))
-        navigation?.navigate('Home')
-      }
+      // const { data } = await api.post('/loginmobile/', qs.stringify(credentials))
+      // if(data !== 0) {
+      //   dispatch(setToken({ apiKey: data.token, email: credentials.email, nome: data.nome }))
+      //   navigation?.navigate('Home')
+      //   return
+      // }
+      navigation?.navigate('Home')
+      return
     } catch(err) {
       console.log(err)
     }
+    Alert.alert('Não foi possível conectar, tente novamente')
     setIsFetching(false)
   }
 

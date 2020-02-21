@@ -48,7 +48,7 @@ function Home() {
           <Username>{userInfo.nome}</Username>
         </Banner>
         <Note>
-          <Text>Rendimento</Text>
+          <Text>Valor acumulado</Text>
           <Rendimento>{userInfo.rendimento}</Rendimento>
         </Note>
       </Container>
