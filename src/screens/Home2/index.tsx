@@ -1,5 +1,7 @@
 import {SafeAreaView} from 'react-navigation'
 import React, {useState, useEffect} from 'react';
+import { StatusBar } from 'react-native';
+
 import {LinearGradient} from 'react-native-linear-gradient'
 import Emoji from 'react-native-emoji'
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
@@ -10,7 +12,22 @@ import qs from 'query-string'
 import api from '../../services/auth'
 
 // styles
-import { Container, Username, Text, Rendimento, EmojiList, Banner, Note } from './styles'
+import { 
+  Container, 
+  Username, 
+  Text,
+  BtnAction,
+  Rendimento, 
+  EmojiList, 
+  Banner, 
+  Note, 
+  ContainerRendimento,
+  CotainerHeader,
+  Body,
+  Span,
+  NoteHeader,
+  NoteBody,
+  H3 } from './styles'
 
 // utils
 import help from '../../utils/help'
@@ -30,7 +47,7 @@ function Home() {
 
   const getUserInfo = async () => {
     const { data } = await api.post('/rendimento/', qs.stringify({ apiKey: token.apiKey, email: token.email }))
-    setUserInfo({ rendimento: help.formatBRL(+data.msg), nome: token.nome, tokenApi: token.apiKey })
+    setUserInfo({ rendimento: data.msg, nome: token.nome, tokenApi: token.apiKey })
   }
 
   useEffect(() => { 
@@ -43,14 +60,41 @@ function Home() {
 
   return (
     <SafeAreaView>
+      <StatusBar translucent backgroundColor="transparent" />
       <Container>
+
         <Banner>
           <Username>{userInfo.nome}</Username>
         </Banner>
+
         <Note>
-          <Text>Rendimento</Text>
-          <Rendimento>{userInfo.rendimento}</Rendimento>
+          <NoteHeader>
+            <CotainerHeader>
+              <H3>Banco</H3>
+              <Span>243</Span>
+            </CotainerHeader>
+            <CotainerHeader>
+              <H3>Agência</H3>
+              <Span>0001</Span>
+            </CotainerHeader>
+            <CotainerHeader>
+              <H3>Conta</H3>
+              <Span>123456-7</Span>
+            </CotainerHeader>
+          </NoteHeader>
+          <NoteBody>
+            <Span>Saldo a receber</Span>
+            <Rendimento>{userInfo.rendimento}</Rendimento>
+            <Icon name="eye" size={25} color="#262626" style={{position: 'absolute', right: 0, top: 40}}/>
+            <BtnAction>
+              <Text>Ver extrato</Text><Icon name="arrow-right" size={20} color="#fff"/>
+            </BtnAction>
+          </NoteBody>
         </Note>
+        
+        <Body>
+
+        </Body>
       </Container>
     </SafeAreaView>
   )

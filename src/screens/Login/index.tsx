@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import qs from 'query-string'
 import { useDispatch } from 'react-redux'
-import { ActivityIndicator as Loader } from 'react-native'
+import { ActivityIndicator as Loader, StatusBar } from 'react-native'
 
 import { setToken } from '../../store/actions/token'
 
@@ -43,13 +43,25 @@ function Login ({ navigation}: NavigationContainerProps) {
   const getToken = async () => {
     try {
       const { data } = await api.post('/loginmobile/', qs.stringify(credentials))
+
+      if(data.tipo != 3) {
+        Alert.alert('Para logar, é preciso ser cedente')
+        setIsFetching(false)
+        return
+      }
+
       if(data !== 0) {
         dispatch(setToken({ apiKey: data.token, email: credentials.email, nome: data.nome }))
-        navigation?.navigate('Home')
+        navigation?.navigate('App')
+        setIsFetching(false)
+        return
       }
+      return
     } catch(err) {
       console.log(err)
+      setIsFetching(false)
     }
+    Alert.alert('Não foi possível conectar, tente novamente')
     setIsFetching(false)
   }
 
@@ -58,8 +70,10 @@ function Login ({ navigation}: NavigationContainerProps) {
     getToken()
   
   };
+
   return (
     <View style={style.container}>
+      <StatusBar backgroundColor="#fff" animated />
       <Image
         source={require('../../assets/img/logo-full.png')}
         style={style.logo}
@@ -107,6 +121,7 @@ const style = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     paddingHorizontal: 20,
+    backgroundColor: '#fff'
   },
   logo: {
     marginVertical: 50,

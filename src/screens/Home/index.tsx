@@ -9,7 +9,7 @@ import qs from 'query-string'
 import api from '../../services/auth'
 
 // styles
-import { Container, Username, Text, Rendimento, EmojiList } from './styles'
+import { Container, Username, Text, Rendimento, EmojiList, Capa } from './styles'
 
 // utils
 import help from '../../utils/help'
@@ -30,13 +30,11 @@ function Home () {
     getUserInfo()
   }, [token])
 
-  const toggle = () => {
-    setState({ isShow: !state.isShow, index: Math.floor(Math.random() * emojiList.length)})
-  }
-
   return (
     <Container> 
-  
+      <Capa>
+        <Username>Olá , {userInfo.nome}</Username>
+      </Capa>
     </Container>
   )
 }

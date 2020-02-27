@@ -5,4 +5,5 @@ export const LoaderContainer = styled.View`
   height: 100px;
   justify-content: center;
   align-items: center;
+  background: #fff;
 `
