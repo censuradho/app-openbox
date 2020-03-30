@@ -8,6 +8,7 @@ export const Container = styled.View`
 export const Body = styled.View`
   width: 100%;
   padding: 20px;
+  margin-top: 150px;
 `
 export const Banner = styled.View`
   height: 250px;

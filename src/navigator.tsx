@@ -18,6 +18,7 @@ import Home2 from './screens/Home2'
 import InitialScreen from './screens/InitialScreen'
 import SignIn from './screens/SignIn'
 import Rendimentos from './screens/Rendimentos'
+import Loading from './screens/Loading'
 
 const Main = createStackNavigator({
   Home2: {
@@ -47,18 +48,18 @@ const  TabStack = createBottomTabNavigator({
 }, 
 { 
   tabBarOptions: {
-  activeTintColor: '#ccc',
-  inactiveTintColor: '#262626',
+  activeTintColor: 'rgba(0,0,0,.85)',
+  inactiveTintColor: 'rgba(0,0,0,.35)',
 }
 })
 
 const App = createSwitchNavigator({
-  InitialScreen: {
-    screen: InitialScreen,
-    navigationOptions: {
-      header: null,
-    }
-  },
+  // InitialScreen: {
+  //   screen: InitialScreen,
+  //   navigationOptions: {
+  //     header: null,
+  //   }
+  // },
   Login: {
     screen: Login,
     navigationOptions: {

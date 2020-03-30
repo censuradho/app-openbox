@@ -27,6 +27,11 @@ import {NavigationContainerProps} from 'react-navigation';
 // components
 import Input from '../../components/Input'
 
+const info = {
+  email: 'gustavoleiteoliveira800@gmail.com',
+  senha: 'Openbox154'
+}
+
 function Login ({ navigation}: NavigationContainerProps) {
   const dispatch = useDispatch()
 
@@ -42,7 +47,7 @@ function Login ({ navigation}: NavigationContainerProps) {
 
   const getToken = async () => {
     try {
-      const { data } = await api.post('/loginmobile/', qs.stringify(credentials))
+      const { data } = await api.post('/loginmobile/', qs.stringify(info))
 
       if(data.tipo != 3) {
         Alert.alert('Para logar, é preciso ser cedente')
@@ -65,7 +70,7 @@ function Login ({ navigation}: NavigationContainerProps) {
     setIsFetching(false)
   }
 
-  const handleSubmit = async () => {
+  const handleSubmit = () => {
     setIsFetching(true)
     getToken()
   

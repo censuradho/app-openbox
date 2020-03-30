@@ -1,6 +1,6 @@
 import {SafeAreaView} from 'react-navigation'
 import React, {useState, useEffect} from 'react';
-import { StatusBar } from 'react-native';
+import { StatusBar, ToastAndroid } from 'react-native';
 
 import {LinearGradient} from 'react-native-linear-gradient'
 import Emoji from 'react-native-emoji'
@@ -47,6 +47,7 @@ function Home() {
 
   const getUserInfo = async () => {
     const { data } = await api.post('/rendimento/', qs.stringify({ apiKey: token.apiKey, email: token.email }))
+    console.log(data)
     setUserInfo({ rendimento: data.msg, nome: token.nome, tokenApi: token.apiKey })
   }
 
@@ -93,7 +94,7 @@ function Home() {
         </Note>
         
         <Body>
-
+          <Text>asdasdasdas</Text>
         </Body>
       </Container>
     </SafeAreaView>
